@@ -1,4 +1,4 @@
-from .utils import extract_function_call_json, evaluate_function_call
+from utils import extract_function_call_json, evaluate_function_call
 
 class BaseTool:
     def __init__(self, tool_config):

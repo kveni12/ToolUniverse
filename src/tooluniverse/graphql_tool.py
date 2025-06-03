@@ -1,7 +1,7 @@
 from graphql import build_schema
 from graphql.language import parse
 from graphql.validation import validate
-from .base_tool import BaseTool
+from base_tool import BaseTool
 import requests
 import copy
 import json

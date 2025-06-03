@@ -1,0 +1,1333 @@
+[
+    {
+        "name": "get_protein_metadata_by_pdb_id",
+        "description": "Retrieve basic protein structure metadata using the 4-character PDB ID",
+        "label": [
+            "Protein",
+            "Metadata",
+            "Structure",
+            "RCSB",
+            "entries"
+        ],
+        "type": "entries",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID of the protein",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "struct.title",
+                "exptl.method",
+                "rcsb_entry_info.resolution_combined",
+                "rcsb_accession_info.initial_release_date"
+            ]
+        }
+    },
+    {
+        "name": "get_polymer_entity_ids_by_pdb_id",
+        "description": "List polymer entity IDs for a given PDB ID. Useful for building further queries on individual entities.",
+        "label": ["Protein", "Polymer", "Entity", "Chain", "RCSB"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID of the protein",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entry_container_identifiers.polymer_entity_ids"
+            ]
+        }
+    },
+    {
+        "name": "get_ligand_chemicals_by_pdb_id",
+        "description": "Retrieve ligand chemical component IDs and descriptions for a given PDB structure by PDB ID.",
+        "label": [
+            "Ligand",
+            "Chemical",
+            "Component",
+            "RCSB",
+            "entries"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID of the protein",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "nonpolymer_entities.nonpolymer_entity_instances.rcsb_nonpolymer_instance_feature_summary.comp_id"
+            ]
+        }
+    },
+    {
+        "name": "get_experimental_methods_by_pdb_id",
+        "description": "Retrieve experimental methods used to determine the structure by PDB ID.",
+        "label": ["Experimental", "Method", "RCSB", "entries"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "exptl.method"
+            ]
+        }
+    },
+    {
+        "name": "get_polymer_entity_ids_by_pdb_id",
+        "description": "Get polymer entity IDs for a PDB entry",
+        "label": ["Polymer", "Entity", "IDs", "RCSB", "entries"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entry_container_identifiers.polymer_entity_ids"
+            ]
+        }
+    },
+    {
+        "name": "get_polymer_entity_type_by_entity_id",
+        "description": "Get the polymer entity type (e.g., Protein, DNA) using the polymer entity ID.",
+        "label": ["Polymer", "Entity", "Type", "RCSB", "polymer_entity"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Polymer entity ID like '1A8M_1'",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_polymer_entity.pdbx_description",
+                "entity_poly.rcsb_entity_polymer_type"
+            ]
+        }
+    },
+    {
+        "name": "get_experimental_method_by_pdb_id",
+        "description": "Retrieve the experimental method and release date for a given PDB structure.",
+        "label": [
+            "Experimental Method",
+            "Cryo-EM",
+            "X-ray",
+            "NMR",
+            "Metadata",
+            "RCSB"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID of the structure",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "exptl.method",
+                "rcsb_accession_info.initial_release_date"
+            ]
+        }
+    },
+    {
+        "name": "get_source_organism_by_pdb_id",
+        "description": "Retrieve the scientific name of the source organism for a given PDB structure.",
+        "label": [
+            "Organism",
+            "Source",
+            "Taxonomy",
+            "RCSB",
+            "Metadata"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID of the structure",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entity_source_organism.ncbi_scientific_name"
+            ]
+        }
+    },
+    {
+        "name": "get_resolution_and_method_by_pdb_id",
+        "description": "Retrieve resolution and experimental method information for a given PDB structure.",
+        "label": [
+            "Resolution",
+            "Experimental Method",
+            "RCSB",
+            "Metadata"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entry_info.resolution_combined",
+                "exptl.method"
+            ]
+        }
+    },
+    {
+        "name": "get_citation_info_by_pdb_id",
+        "description": "Retrieve citation information (authors, journal, year) for a given PDB structure.",
+        "label": [
+            "Citation",
+            "Publication",
+            "RCSB",
+            "Metadata"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_primary_citation.rcsb_authors",
+                "rcsb_primary_citation.title",
+                "rcsb_primary_citation.rcsb_journal_abbrev",
+                "rcsb_primary_citation.year",
+                "rcsb_primary_citation.pdbx_database_id_DOI",
+                "rcsb_primary_citation.rcsb_ORCID_identifiers",
+                "rcsb_pubmed_abstract_text",
+                "rcsb_pubmed_mesh_descriptors_lineage.id",
+                "rcsb_pubmed_mesh_descriptors_lineage.name"
+            ]
+        }
+    },
+    {
+        "name": "get_sequence_lengths_by_pdb_id",
+        "description": "Retrieve the sequence lengths of polymer entities for a given PDB structure.",
+        "label": [
+            "Sequence",
+            "Length",
+            "Polymer",
+            "RCSB",
+            "Metadata"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "entity_poly.rcsb_sample_sequence_length"
+            ]
+        }
+    },
+    {
+        "name": "get_sequences_by_pdb_id",
+        "description": "Retrieve amino acid or nucleotide sequences of polymer entities for a given PDB structure.",
+        "label": [
+            "Sequence",
+            "Polymer",
+            "Amino Acid",
+            "Nucleotide",
+            "RCSB"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "entity_poly.pdbx_seq_one_letter_code_can"
+            ]
+        }
+    },
+    {
+        "name": "get_mutation_annotations_by_pdb_id",
+        "description": "Retrieve mutation annotations for a given PDB structure.",
+        "label": [
+            "Mutation",
+            "Annotation",
+            "RCSB"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "entity_poly.rcsb_mutation_count",
+                "rcsb_polymer_entity.pdbx_mutation"
+            ]
+        }
+    },
+    {
+        "name": "get_em_3d_fitting_and_reconstruction_details",
+        "description": "Retrieve EM 3D fitting model details and associated 3D reconstruction info for a given PDB entry.",
+        "label": [
+            "EM",
+            "3D Fitting",
+            "Reconstruction",
+            "Cryo-EM",
+            "PDB"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["em_3d_fitting_list.pdb_entry_id"]
+            },
+            "return_fields": [
+                "em_3d_fitting_list.id",
+                "em_3d_fitting_list.pdb_chain_id",
+                "em_3d_fitting_list.pdb_chain_residue_range",
+                "em_3d_fitting_list.details",
+                "em_3d_reconstruction.id",
+                "em_3d_reconstruction.algorithm",
+                "em_3d_reconstruction.method",
+                "em_3d_reconstruction.details",
+                "em_3d_reconstruction.nominal_pixel_size",
+                "em_3d_reconstruction.actual_pixel_size",
+                "em_3d_reconstruction.resolution",
+                "em_3d_reconstruction.resolution_method",
+                "em_3d_reconstruction.symmetry_type",
+                "em_3d_reconstruction.num_particles",
+                "em_3d_reconstruction.num_class_averages",
+                "em_3d_reconstruction.refinement_type",
+                "em_3d_reconstruction.magnification_calibration"
+            ]
+        }
+    },
+    {
+        "name": "get_assembly_summary",
+        "description": "Get key assembly composition and symmetry summary for a PDB entry assembly.",
+        "label": ["Assembly", "Symmetry", "Summary"],
+        "type": "assembly",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "assembly_id": {
+                "type": "string",
+                "description": "Assembly ID in format 'PDBID-assemblyNumber' (e.g., '1A8M-1')",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "assembly_id": ["assembly_id"]
+            },
+            "return_fields": [
+            "rcsb_id",
+            "rcsb_assembly_info.polymer_entity_instance_count_protein",
+            "rcsb_assembly_info.polymer_entity_instance_count_DNA",
+            "rcsb_assembly_info.polymer_entity_instance_count_RNA",
+            "rcsb_assembly_info.num_homomeric_interface_entities",
+            "rcsb_assembly_info.num_heteromeric_interface_entities",
+            "rcsb_assembly_info.total_assembly_buried_surface_area",
+            "rcsb_struct_symmetry.symbol",
+            "rcsb_struct_symmetry.type",
+            "rcsb_struct_symmetry.oligomeric_state"
+            ]
+        }
+    },
+    {
+        "name": "get_biological_assembly_info_by_pdb_id",
+        "description": "Retrieve biological assembly details for a PDB structure.",
+        "label": [
+            "Biological",
+            "Assembly",
+            "RCSB",
+            "Structure"
+        ],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_assembly_info.assembly_id",
+                "pdbx_struct_assembly.method_details",
+                "pdbx_struct_assembly.details"
+            ]
+        }
+    },
+    {
+        "name": "get_taxonomy_by_pdb_id",
+        "description": "Get the scientific name and taxonomy of the organism(s) associated with a PDB entry.",
+        "label": ["Taxonomy", "Organism", "Biology", "RCSB", "entry"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entity_host_organism.taxonomy_lineage.name",
+                "rcsb_entity_source_organism.ncbi_parent_scientific_name"
+            ]
+        }
+    },
+    {
+        "name": "get_release_date_by_pdb_id",
+        "description": "Get the release and deposition dates for a PDB entry.",
+        "label": ["Release", "Deposition", "Date", "RCSB", "entry"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character RCSB PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_accession_info.initial_release_date",
+                "rcsb_accession_info.deposit_date"
+            ]
+        }
+    },
+    {
+        "name": "get_expression_system_by_pdb_id",
+        "description": "Retrieve the expression system used to produce the macromolecule in a given PDB entry.",
+        "label": ["Expression", "Biotech", "RCSB", "entry"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "4-character RCSB PDB ID",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "entity_src_gen.expression_system_id"
+            ]
+        }
+    },
+    {
+        "name": "get_host_organism_by_pdb_id",
+        "description": "Get the host organism used for protein expression in a PDB entry.",
+        "label": ["Host", "Organism", "Expression", "Biology", "RCSB"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "entity_src_gen.host_org_common_name",
+                "entity_src_gen.pdbx_host_org_scientific_name"
+            ]
+        }
+    },
+    {
+        "name": "get_ec_number_by_entity_id",
+        "description": "Retrieve the Enzyme Commission (EC) number(s) for an entity.",
+        "label": ["Enzyme", "Classification", "EC", "Entity", "RCSB"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "entity_id": {
+                "type": "string",
+                "description": "Polymer entity ID (e.g., '1A8M_1')",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_polymer_entity.rcsb_ec_lineage.id",
+                "rcsb_polymer_entity.rcsb_ec_lineage.depth",
+                "rcsb_polymer_entity.rcsb_ec_lineage.name"
+            ]
+        }
+    },
+    {
+        "name": "get_gene_name_by_entity_id",
+        "description": "Retrieve gene name(s) associated with a polymer entity.",
+        "label": ["Gene", "Function", "Entity", "Biology", "RCSB"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Entity ID like '1A8M_1'",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_entity_source_organism.rcsb_gene_name.value",
+                "rcsb_entity_source_organism.rcsb_gene_name.provenance_source"
+            ]
+        }
+    },
+    {
+        "name": "get_cellular_location_by_entity_id",
+        "description": "Get cellular location for a polymer entity.",
+        "label": ["GO", "Cellular Location", "Biology", "Ontology"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Polymer entity ID like '1A8M_1'",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "entity_src_gen.pdbx_gene_src_cellular_location"
+            ]
+        }
+    },
+    {
+        "name": "get_polymer_molecular_weight_by_entity_id",
+        "description": "Retrieve the molecular weight of a polymer entity.",
+        "label": ["Polymer", "Molecular Weight", "Entity", "RCSB"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Polymer entity ID like '1A8M_1'",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_polymer_entity.formula_weight"
+            ]
+        }
+    },
+    {
+        "name": "get_ligand_bond_count_by_pdb_id",
+        "description": "Get the number of bonds for each ligand in a given PDB structure.",
+        "label": ["Ligand", "Chemical", "Bond", "Structure"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB ID of the entry",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_nonpolymer_instance_feature_summary.comp_id",
+                "assemblies.nonpolymer_entity_instances.nonpolymer_entity.nonpolymer_comp.rcsb_chem_comp_info.bond_count"
+            ]
+        }
+    },
+    {
+        "name": "get_crystal_growth_conditions_by_pdb_id",
+        "description": "Get information about the crystallization method and conditions for a structure.",
+        "label": ["Crystallography", "Growth", "Conditions", "PDB"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB ID of the structure",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "exptl_crystal_grow.crystal_id",
+                "exptl_crystal_grow.details",
+                "exptl_crystal_grow.method",
+                "exptl_crystal_grow.pH",
+                "exptl_crystal_grow.temp",
+                "exptl_crystal_grow.pdbx_details"
+            ]
+        }
+    },
+    {
+        "name": "get_sequence_coverage_by_entity_id",
+        "description": "Check the sequence coverage of the structure vs. the canonical UniProt sequence.",
+        "label": ["Coverage", "Sequence", "UniProt", "Alignment"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Polymer entity ID like '1A8M_1'",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_uniprot_accession",
+                "rcsb_polymer_entity_annotation.annotation_id",
+                "rcsb_polymer_entity_annotation.type",
+                "rcsb_polymer_entity_annotation.description"
+            ]
+        }
+    },
+    {
+        "name": "get_oligosaccharide_descriptors_by_entity_id",
+        "description": "Retrieve structural descriptors for branched entities (e.g., oligosaccharides) in a PDB entry.",
+        "label": ["Carbohydrate", "Oligosaccharide", "Descriptor", "Branched Entity"],
+        "type": "branched_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "entity_id": {
+                "type": "string",
+                "description": "Branched entity ID like '5FMB_2'",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "pdbx_entity_branch.type",
+                "pdbx_entity_branch_descriptor.type",
+                "pdbx_entity_branch_descriptor.descriptor"
+            ]
+        }
+    },
+    {
+        "name": "get_sequence_positional_features_by_instance_id",
+        "description": "Retrieve sequence positional features (e.g., binding sites, motifs) for a polymer entity instance.",
+        "label": ["Sequence", "Feature", "Annotation", "Instance"],
+        "type": "polymer_entity_instance",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "instance_id": {
+                "type": "string",
+                "description": "Polymer entity instance ID like '1NDO.A'",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "instance_id": ["instance_id"]
+            },
+            "return_fields": [
+                "rcsb_polymer_instance_feature.type",
+                "rcsb_polymer_instance_feature.feature_positions.beg_seq_id",
+                "rcsb_polymer_instance_feature.feature_positions.end_seq_id"
+            ]
+        }
+    },
+    {
+        "name": "get_crystallographic_properties_by_pdb_id",
+        "description": "Retrieve crystallographic properties such as unit cell dimensions and space group for a PDB entry.",
+        "label": ["Crystallography", "Unit Cell", "Space Group", "PDB"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB ID of the structure",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "cell.length_a",
+            "cell.length_b",
+            "cell.length_c",
+            "cell.angle_alpha",
+            "cell.angle_beta",
+            "cell.angle_gamma",
+            "symmetry.space_group_name_H_M"
+            ]
+        }
+    },
+    {
+        "name": "get_structure_validation_metrics_by_pdb_id",
+        "description": "Retrieve structure validation metrics such as R-free, R-work, and clashscore for a PDB entry.",
+        "label": ["Validation", "Metrics", "Quality", "PDB"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB ID of the structure",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "refine.ls_R_factor_R_free",
+                "refine.ls_R_factor_R_work",
+                "pdbx_vrpt_summary_geometry.clashscore"
+            ]
+        }
+    },
+    {
+        "name": "get_structure_title_by_pdb_id",
+        "description": "Retrieve the structure title for a given PDB entry.",
+        "label": ["Metadata", "Structure", "Title"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "struct.title"
+            ]
+        }
+    },
+    {
+        "name": "get_deposition_date_by_pdb_id",
+        "description": "Retrieve the date when the structure was deposited in the PDB.",
+        "label": ["Metadata", "Deposition", "Date"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_accession_info.deposit_date"
+            ]
+        }
+    },
+    {
+        "name": "get_polymer_entity_count_by_pdb_id",
+        "description": "Get the number of distinct polymer entities (chains) in a structure.",
+        "label": ["Polymer", "Entities", "Count"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entry_info.polymer_entity_count"
+            ]
+        }
+    },
+    {
+        "name": "get_emdb_ids_by_pdb_id",
+        "description": "Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB entry.",
+        "label": ["EMDB", "Electron Microscopy", "Structure"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "pdb_id": {
+                    "type": "string",
+                    "description": "4-character PDB ID",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "rcsb_entry_container_identifiers.emdb_ids"
+            ]
+        }
+    },
+    {
+        "name": "get_uniprot_accession_by_entity_id",
+        "description": "Fetch UniProt accession numbers associated with a specific polymer entity.",
+        "label": ["UniProt", "Protein", "Cross-reference"],
+        "type": "polymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Polymer entity ID (e.g., '1A8M_1')",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "rcsb_polymer_entity_container_identifiers.uniprot_ids"
+            ]
+        }
+    },
+    {
+        "name": "get_chemical_formula_by_entity_id",
+        "description": "Retrieve the chemical formula of a non-polymer (ligand) entity.",
+        "label": ["Chemical", "Ligand", "Formula"],
+        "type": "nonpolymer_entity",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "entity_id": {
+                    "type": "string",
+                    "description": "Non-polymer entity ID (e.g., '1A8M_2')",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "entity_id": ["entity_id"]
+            },
+            "return_fields": [
+                "entry.branched_entities.prd.chem_comp.formula"
+            ]
+        }
+    },
+    {
+        "name": "get_crystallization_ph_by_pdb_id",
+        "description": "Fetch the pH used during crystallization of the sample.",
+        "label": ["Crystallization", "pH", "Experiment"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "RCSB PDB ID of the structure",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "exptl_crystal_grow.pH"
+            ]
+        }
+    },
+    {
+        "name": "get_space_group_by_pdb_id",
+        "description": "Get the crystallographic space group of the structure.",
+        "label": ["Crystallography", "Space Group", "Symmetry"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "4-character RCSB PDB ID",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "symmetry.space_group_name_H_M"
+            ]
+        }
+    },
+    {
+        "name": "get_protein_classification_by_pdb_id",
+        "description": "Get the classification of the protein structure (e.g., transferase, oxidoreductase).",
+        "label": ["Classification", "Protein", "Function"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB ID of the entry",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "struct_keywords.pdbx_keywords"
+            ]
+        }
+    },
+    {
+        "name": "get_structure_determination_software_by_pdb_id",
+        "description": "Retrieve names of software used during structure determination.",
+        "label": ["Software", "Structure Determination", "Methods"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "RCSB PDB entry ID",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "software.name",
+            "software.version",
+            "software.type"
+            ]
+        }
+    },
+    {
+        "name": "get_sample_preparation_details_by_pdb_id",
+        "description": "Return detailed sample preparation method description for structure determination.",
+        "label": ["Sample", "Preparation", "Methods"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB entry ID",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+                "exptl.details"
+            ]
+        }
+    },
+    {
+        "name": "get_refinement_resolution_by_pdb_id",
+        "description": "Retrieve the reported resolution from refinement data for X-ray structures.",
+        "label": ["Resolution", "Refinement", "Entry"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB entry ID",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "refine.ls_d_res_high"
+            ]
+        }
+    },
+    {
+        "name": "get_binding_affinity_by_pdb_id",
+        "description": "Retrieve binding affinity constants (Kd, Ki, IC50) associated with ligands in a PDB entry.",
+        "label": ["Binding", "Affinity", "Ligand"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "RCSB PDB ID (e.g., 1A8M)",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_id"]
+            },
+            "return_fields": [
+            "rcsb_binding_affinity.value",
+            "rcsb_binding_affinity.unit",
+            "rcsb_binding_affinity.provenance_code",
+            "rcsb_binding_affinity.symbol"
+            ]
+        }
+    },
+    {
+        "name": "get_ligand_smiles_by_chem_comp_id",
+        "description": "Retrieve the SMILES chemical structure string for a given chemical component (ligand) ID.",
+        "label": ["Ligand", "Chemical", "SMILES", "Structure"],
+        "type": "chem_comp",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "chem_comp_id": {
+                    "type": "string",
+                    "description": "Chemical component ID (e.g., 'ATP')",
+                    "required": true
+                }
+            }
+        },
+        "fields": {
+            "search_fields": {
+                "chem_comp_id": ["rcsb_chem_comp.id"]
+            },
+            "return_fields": [
+                "rcsb_chem_comp_descriptor.SMILES"
+            ]
+        }
+    },
+    {
+        "name": "get_core_refinement_statistics",
+        "description": "Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy, phase errors, and solvent model parameters.",
+        "label": ["Refinement", "R-factor", "Occupancy", "Phase Error", "Solvent Model"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "PDB entry ID (e.g., '1ABC')",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_entry_info.entry_id"]
+            },
+            "return_fields": [
+            "refine.ls_R_factor_R_work",
+            "refine.ls_R_factor_R_free",
+            "refine.occupancy_max",
+            "refine.occupancy_min",
+            "refine.pdbx_overall_phase_error",
+            "refine.solvent_model_param_bsol",
+            "refine.solvent_model_param_ksol"
+            ]
+        }
+    },
+    {
+        "name": "get_target_cofactor_info",
+        "description": "Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of action, literature references, and resource metadata.",
+        "label": ["Target", "Cofactor", "Mechanism", "PubMed", "Patent"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "Target ID or entity identifier (e.g., UniProt ID or internal target id)",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["rcsb_target_cofactors.target_resource_id"]
+            },
+            "return_fields": [
+            "polymer_entities.rcsb_target_cofactors.cofactor_prd_id",
+            "polymer_entities.rcsb_target_cofactors.cofactor_resource_id",
+            "polymer_entities.rcsb_target_cofactors.mechanism_of_action",
+            "polymer_entities.rcsb_target_cofactors.neighbor_flag",
+            "polymer_entities.rcsb_target_cofactors.patent_nos",
+            "polymer_entities.rcsb_target_cofactors.pubmed_ids",
+            "polymer_entities.rcsb_target_cofactors.resource_name",
+            "polymer_entities.rcsb_target_cofactors.resource_version"
+            ]
+        }
+    },
+    {
+        "name": "get_chem_comp_audit_info",
+        "description": "Fetch audit history for a chemical component: action type, date, details, ordinal, and processing site.",
+        "label": ["Comp ID", "Action Type", "Date", "Details", "Ordinal", "Processing Site"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "Chemical component ID to retrieve audit info for",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.comp_id"]
+            },
+            "return_fields": [
+            "nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.comp_id",
+            "nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.action_type",
+            "nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.date",
+            "nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.details",
+            "nonpolymer_entities.nonpolymer_comp.pdbx_chem_comp_audit.ordinal"
+        ]
+        }
+    },
+    {
+        "name": "get_chem_comp_charge_and_ambiguity",
+        "description": "Retrieve the formal charge and ambiguity flag of a chemical component.",
+        "label": ["Comp ID", "Formal Charge", "Ambiguous Flag"],
+        "type": "entry",
+        "parameter": {
+            "type": "object",
+            "properties": {
+            "pdb_id": {
+                "type": "string",
+                "description": "Chemical component ID to query charge and ambiguity",
+                "required": true
+            }
+            }
+        },
+        "fields": {
+            "search_fields": {
+            "pdb_id": ["nonpolymer_entities.nonpolymer_comp.chem_comp.id"]
+            },
+            "return_fields": [
+            "nonpolymer_entities.nonpolymer_comp.chem_comp.id",
+            "nonpolymer_entities.nonpolymer_comp.chem_comp.pdbx_formal_charge",
+            "nonpolymer_entities.nonpolymer_comp.chem_comp.pdbx_ambiguous_flag"
+            ]
+        }
+    }
+]
