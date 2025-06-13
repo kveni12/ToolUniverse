@@ -36,47 +36,47 @@ class RCSBTool(BaseTool):
         )
         return query.exec()
 
-### TESTING CODE
-# if __name__ == "__main__":
-#     pdb_id = "8A67"
-#     entity_index = "1"
-#     entity_id = f"{pdb_id}_{entity_index}"
-#     assembly_id = f"{pdb_id}-1"
-#     chem_comp_id = "ATP"
+## TESTING CODE
+if __name__ == "__main__":
+    pdb_id = "8A67"
+    entity_index = "1"
+    entity_id = f"{pdb_id}_{entity_index}"
+    assembly_id = f"{pdb_id}-1"
+    chem_comp_id = "ATP"
 
-#     tool_file = "src/tooluniverse/data/rcsb_pdb_tools.json"
+    tool_file = "src/tooluniverse/data/rcsb_pdb_tools.json"
 
-#     with open(tool_file, "r") as f:
-#         tool_defs = json.load(f)
+    with open(tool_file, "r") as f:
+        tool_defs = json.load(f)
 
-#     if not isinstance(tool_defs, list):
-#         tool_defs = [tool_defs]
+    if not isinstance(tool_defs, list):
+        tool_defs = [tool_defs]
 
-#     for i, tool_json in enumerate(tool_defs):
-#         try:
-#             tool = RCSBTool(tool_json)
+    for i, tool_json in enumerate(tool_defs):
+        try:
+            tool = RCSBTool(tool_json)
 
-#             params = {}
-#             param_props = tool_json.get("parameter", {}).get("properties", {})
+            params = {}
+            param_props = tool_json.get("parameter", {}).get("properties", {})
 
-#             # Dynamically assign parameter values
-#             if "pdb_id" in param_props:
-#                 params["pdb_id"] = pdb_id
-#             elif "entity_id" in param_props:
-#                 params["entity_id"] = entity_id
-#             elif "instance_id" in param_props:
-#                 params["instance_id"] = f"{pdb_id}.A"
-#             elif "assembly_id" in param_props:
-#                 params["assembly_id"] = "1"
-#             elif "chem_comp_id" in param_props:
-#                 params["chem_comp_id"] = chem_comp_id
-#             else:
-#                 print(f"[SKIP] Tool #{i + 1} ({tool.name}): no supported parameters found.")
-#                 continue
+            # Dynamically assign parameter values
+            if "pdb_id" in param_props:
+                params["pdb_id"] = pdb_id
+            elif "entity_id" in param_props:
+                params["entity_id"] = entity_id
+            elif "instance_id" in param_props:
+                params["instance_id"] = f"{pdb_id}.A"
+            elif "assembly_id" in param_props:
+                params["assembly_id"] = "1"
+            elif "chem_comp_id" in param_props:
+                params["chem_comp_id"] = chem_comp_id
+            else:
+                print(f"[SKIP] Tool #{i + 1} ({tool.name}): no supported parameters found.")
+                continue
 
-#             print(f"\n--- Running Tool #{i + 1}: {tool.name} ---")
-#             output = tool.run(params)
-#             print(json.dumps(output, indent=4))
+            print(f"\n--- Running Tool #{i + 1}: {tool.name} ---")
+            output = tool.run(params)
+            print(json.dumps(output, indent=4))
 
-#         except Exception as e:
-#             print(f"[ERROR] Tool #{i + 1} ({tool_json.get('name', 'Unnamed')}): {e}")
+        except Exception as e:
+            print(f"[ERROR] Tool #{i + 1} ({tool_json.get('name', 'Unnamed')}): {e}")
